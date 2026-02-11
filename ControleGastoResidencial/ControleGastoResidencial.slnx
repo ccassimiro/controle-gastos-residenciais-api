@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CGR.API/CGR.API.csproj" Id="c115a16e-8db9-4aea-948a-a6474bf82114" />
+  <Project Path="CGR.Application/CGR.Application.csproj" Id="bb50f0cf-c83d-4560-b11c-c213c3edbc70" />
+  <Project Path="CGR.Domain/CGR.Domain.csproj" Id="02d82d29-0e35-44d2-936e-e156eef214af" />
+  <Project Path="CGR.Infra.Data/CGR.Infra.Data.csproj" Id="ce2570b0-59b5-4f69-a02f-19b0f41802aa" />
+  <Project Path="CGR.Infra.IoC/CGR.Infra.IoC.csproj" Id="6066c073-c530-4fb5-9e96-5c658dd070b7" />
+</Solution>
