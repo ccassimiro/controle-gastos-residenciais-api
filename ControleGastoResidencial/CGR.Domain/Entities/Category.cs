@@ -18,7 +18,7 @@ namespace CGR.Domain.Entities
         {
             ValidateDomain(description, purposeType);
 
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Description = description;
             PurposeType = purposeType;
         }

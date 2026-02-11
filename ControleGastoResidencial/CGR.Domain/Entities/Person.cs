@@ -17,7 +17,7 @@ namespace CGR.Domain.Entities
         {
             ValidateDomain(name, age);
 
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Name = name;
             Age = age;
         }

@@ -12,7 +12,7 @@ namespace CGR.Domain.Entities
     {
         public Guid Id { get; private set; }
         public string Description { get; private set; }
-        public float Value { get; private set; }
+        public decimal Value { get; private set; }
         public PurposeType PurposeType { get; private set; }
 
         public Guid CategoryId { get; private set; }
@@ -20,11 +20,11 @@ namespace CGR.Domain.Entities
         public Guid PersonId { get; private set; }
         public Person Person { get; private set; } = null!;
 
-        public Transaction(string description, float value, PurposeType purposeType, Guid categoryId, Guid personId)
+        public Transaction(string description, decimal value, PurposeType purposeType, Guid categoryId, Guid personId)
         {
             ValidateDomain(description, value, purposeType, categoryId, personId);
 
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Description = description;
             Value = value;
             PurposeType = purposeType;
@@ -32,7 +32,7 @@ namespace CGR.Domain.Entities
             PersonId = personId;
         }
 
-        public void ValidateDomain(string description, float value, PurposeType purposeType, Guid categoryId, Guid personId)
+        public void ValidateDomain(string description, decimal value, PurposeType purposeType, Guid categoryId, Guid personId)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(description), "Descrição é obrigatório.");
             DomainExceptionValidation.When(description.Length > 400, "Descrição deve possuir menos de 400 caracteres.");
