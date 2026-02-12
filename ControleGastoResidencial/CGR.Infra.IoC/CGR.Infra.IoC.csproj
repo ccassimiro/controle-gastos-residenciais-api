@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CGR.Application\CGR.Application.csproj" />
     <ProjectReference Include="..\CGR.Domain\CGR.Domain.csproj" />
     <ProjectReference Include="..\CGR.Infra.Data\CGR.Infra.Data.csproj" />

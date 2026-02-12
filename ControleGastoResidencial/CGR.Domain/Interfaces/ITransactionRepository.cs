@@ -10,6 +10,6 @@ namespace CGR.Domain.Interfaces
     public interface ITransactionRepository
     {
         Task<Transaction> CreateAsync(Transaction transaction);
-        Task<IEnumerable<Transaction>> GetTransactions();
+        Task<IEnumerable<Transaction>> GetTransactionsAsync();
     }
 }

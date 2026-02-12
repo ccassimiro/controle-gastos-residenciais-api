@@ -27,7 +27,7 @@ namespace CGR.Infra.Data.Repositories
             return transaction;
         }
 
-        public async Task<IEnumerable<Transaction>> GetTransactions()
+        public async Task<IEnumerable<Transaction>> GetTransactionsAsync()
         {
             return await _transactionContext.Transactions.ToListAsync();
         }

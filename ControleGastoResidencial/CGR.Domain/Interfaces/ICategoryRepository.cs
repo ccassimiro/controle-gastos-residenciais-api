@@ -9,7 +9,7 @@ namespace CGR.Domain.Interfaces
 {
     public interface ICategoryRepository
     {
-        Task<Category> CreateAsync(Category category);
-        Task<IEnumerable<Category>> GetCategories();
+        Task CreateAsync(Category category);
+        Task<IEnumerable<Category>> GetCategoriesAsync();
     }
 }

@@ -18,15 +18,13 @@ namespace CGR.Infra.Data.Repositories
         {
             _categoryContext = context;
         }
-        public async Task<Category> CreateAsync(Category category)
+        public async Task CreateAsync(Category category)
         {
             _categoryContext.Categories.Add(category);
             await _categoryContext.SaveChangesAsync();
-            
-            return category;
         }
 
-        public async Task<IEnumerable<Category>> GetCategories()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _categoryContext.Categories.ToListAsync();
         }
