@@ -24,6 +24,15 @@ namespace CGR.Infra.Data.Repositories
             await _categoryContext.SaveChangesAsync();
         }
 
+        public async Task<Category> GetByIdAsync(Guid id)
+        {
+            var category = await _categoryContext.Categories.FindAsync(id);
+            if (category == null)
+                throw new KeyNotFoundException($"Category with id '{id}' was not found.");
+
+            return category;
+        }
+
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _categoryContext.Categories.ToListAsync();

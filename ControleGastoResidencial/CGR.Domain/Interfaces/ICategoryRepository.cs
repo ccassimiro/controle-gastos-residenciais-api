@@ -11,5 +11,6 @@ namespace CGR.Domain.Interfaces
     {
         Task CreateAsync(Category category);
         Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<Category> GetByIdAsync(Guid id);
     }
 }
