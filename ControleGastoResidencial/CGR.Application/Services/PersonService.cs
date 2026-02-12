@@ -14,11 +14,13 @@ namespace CGR.Application.Services
     public class PersonService : IPersonService
     {
         private readonly IPersonRepository _personRepository;
+        private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
 
-        public PersonService(IPersonRepository personRepository, IMapper mapper)
+        public PersonService(IPersonRepository personRepository, ITransactionRepository transactionRepository,IMapper mapper)
         {
             _personRepository = personRepository;
+            _transactionRepository = transactionRepository;
             _mapper = mapper;
         }
 
@@ -52,6 +54,12 @@ namespace CGR.Application.Services
             _mapper.Map(personDto, person);
 
             await _personRepository.UpdateAsync(_mapper.Map<Person>(personDto));
+        }
+
+        public async Task<IEnumerable<PersonTotalSummaryDTO>> GetPeopleTotalSummaryAsync()
+        {
+            var peopleTotalSummary = await _transactionRepository.GetTotalSummary();
+            return _mapper.Map<IEnumerable<PersonTotalSummaryDTO>>(peopleTotalSummary);
         }
     }
 }

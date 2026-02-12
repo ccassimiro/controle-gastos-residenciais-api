@@ -1,9 +1,11 @@
 ﻿using CGR.Domain.Entities;
+using CGR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace CGR.Domain.Interfaces
 {
@@ -11,5 +13,8 @@ namespace CGR.Domain.Interfaces
     {
         Task<Transaction> CreateAsync(Transaction transaction);
         Task<IEnumerable<Transaction>> GetTransactionsAsync();
+        Task<IEnumerable<PersonTotalSummary>> GetTotalSummary();
+
+        Task<IEnumerable<CategoryTotalSummary>> GetCategoriesTotalSummary();
     }
 }

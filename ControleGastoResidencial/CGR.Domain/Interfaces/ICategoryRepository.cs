@@ -1,4 +1,5 @@
 ﻿using CGR.Domain.Entities;
+using CGR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

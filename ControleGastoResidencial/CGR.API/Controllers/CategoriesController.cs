@@ -31,13 +31,24 @@ namespace CGR.API.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateCategory([FromBody] CategoryDTO categoryDto)
         {
-            if(categoryDto == null)
+            if (categoryDto == null)
             {
                 return BadRequest("Category data is required.");
             }
 
             await _categoryService.CreateAsync(categoryDto);
             return NoContent();
+        }
+
+        [HttpGet("totals")]
+        public async Task<ActionResult<IEnumerable<CategoryTotalSummaryDTO>>> GetCategoriesTotalTransactions()
+        {
+            var categoryTotals = await _categoryService.GetCategoriesTotalSummaryAsync();
+            if (categoryTotals == null)
+            {
+                return NotFound("No category totals found.");
+            }
+            return Ok(categoryTotals);
         }
     }
 }

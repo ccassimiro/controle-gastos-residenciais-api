@@ -12,5 +12,6 @@ namespace CGR.Application.Interfaces
     {
         Task<IEnumerable<CategoryDTO>> GetCategoriesAsync();
         Task CreateAsync(CategoryDTO categoryDto);
+        Task<IEnumerable<CategoryTotalSummaryDTO>> GetCategoriesTotalSummaryAsync();
     }
 }

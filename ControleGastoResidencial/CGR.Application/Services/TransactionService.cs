@@ -41,6 +41,7 @@ namespace CGR.Application.Services
                 throw new InvalidOperationException("Person under 18 years old cannot have income transactions.");
             }
 
+            // Apenas um safe check que adicionei testando criar transações pelo Swagger, achei necessário ter ele.
             var transactionCategory = await _categoryRepository.GetByIdAsync(transactionDto.CategoryId);
             if (transactionCategory.PurposeType != transactionDto.PurposeType && transactionCategory.PurposeType != PurposeType.Both)
             {

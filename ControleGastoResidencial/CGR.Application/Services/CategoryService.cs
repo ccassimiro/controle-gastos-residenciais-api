@@ -14,12 +14,14 @@ namespace CGR.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ITransactionRepository _transactionRepository;
         private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, ITransactionRepository transactionRepository, IMapper mapper)
         {
              _categoryRepository = categoryRepository;
-             _mapper = mapper;
+            _transactionRepository = transactionRepository;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<CategoryDTO>> GetCategoriesAsync()
         {
@@ -30,6 +32,12 @@ namespace CGR.Application.Services
         public async Task CreateAsync(CategoryDTO categoryDto)
         {
             await _categoryRepository.CreateAsync(_mapper.Map<Category>(categoryDto));
+        }
+
+        public async Task<IEnumerable<CategoryTotalSummaryDTO>> GetCategoriesTotalSummaryAsync()
+        {
+            var categoriesTotalSummary = await _transactionRepository.GetCategoriesTotalSummary();
+            return _mapper.Map<IEnumerable<CategoryTotalSummaryDTO>>(categoriesTotalSummary);
         }
     }
 }

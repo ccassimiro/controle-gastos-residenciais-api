@@ -1,5 +1,6 @@
 ﻿using CGR.Domain.Entities;
 using CGR.Domain.Interfaces;
+using CGR.Domain.Models;
 using CGR.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;

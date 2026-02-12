@@ -9,5 +9,6 @@ namespace CGR.Application.Interfaces
         Task UpdateAsync(PersonDTO personDto);
         Task<IEnumerable<PersonDTO>> GetPeopleAsync();
         Task DeleteAsync(Guid id);
+        Task<IEnumerable<PersonTotalSummaryDTO>> GetPeopleTotalSummaryAsync();
     }
 }

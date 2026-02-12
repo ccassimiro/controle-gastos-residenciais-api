@@ -7,11 +7,11 @@ namespace CGR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class PeopleController : ControllerBase
     {
         private readonly IPersonService _personService;
 
-        public PersonController(IPersonService personService)
+        public PeopleController(IPersonService personService)
         {
             _personService = personService;
         }
@@ -79,6 +79,18 @@ namespace CGR.API.Controllers
             }
             await _personService.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("transactions/totals")]
+        public async Task<ActionResult> GetPersonTotalTransactions()
+        {
+            var peopleTransactions = await _personService.GetPeopleTotalSummaryAsync();
+            if(peopleTransactions == null)
+            {
+                return NotFound("No people transactions found.");
+            }
+
+            return Ok(peopleTransactions);
         }
     }
 }
