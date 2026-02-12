@@ -13,6 +13,9 @@ namespace CGR.Domain.Entities
         public string Name { get; private set; }
         public int Age { get; private set; }
 
+        public IReadOnlyCollection<Transaction> Transactions => _transactions;
+        private readonly List<Transaction> _transactions = new();
+
         public Person(string name, int age)
         {
             ValidateDomain(name, age);
