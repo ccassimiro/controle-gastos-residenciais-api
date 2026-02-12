@@ -18,8 +18,6 @@ namespace CGR.Application.DTOs
         public string Description { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "The Value field is required.")]
-        [Range(typeof(decimal), "0.01", "79228162514264337593543950335",
-            ErrorMessage = "Value must be greater than zero.")]
         public decimal Value { get; set; }
 
         // Se 0 for "None/Unknown", isso força o cliente a mandar 1+

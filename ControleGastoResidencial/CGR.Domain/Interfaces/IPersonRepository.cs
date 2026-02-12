@@ -11,7 +11,7 @@ namespace CGR.Domain.Interfaces
     {
         Task<Person> CreateAsync(Person person);
         Task<Person> GetByIdAsync(Guid? id);
-        Task<Person> UpdateAsync(Person person);
+        Task UpdateAsync(Person person);
         Task<IEnumerable<Person>> GetPeopleAsync();
         Task DeleteAsync(Guid id);
     }

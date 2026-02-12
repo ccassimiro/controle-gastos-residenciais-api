@@ -45,10 +45,13 @@ namespace CGR.Application.Services
             return _mapper.Map<PersonDTO>(person);
         }
 
-        public async Task<PersonDTO> UpdateAsync(PersonDTO personDto)
+        public async Task UpdateAsync(PersonDTO personDto)
         {
-            var updatedPerson = await _personRepository.UpdateAsync(_mapper.Map<Person>(personDto));
-            return _mapper.Map<PersonDTO>(updatedPerson);
+            var person = await _personRepository.GetByIdAsync(personDto.Id);
+            // necessário fazer esse mapeamento para manter o tracking do objeto do EF para conseguir salvar no banco
+            _mapper.Map(personDto, person);
+
+            await _personRepository.UpdateAsync(_mapper.Map<Person>(personDto));
         }
     }
 }

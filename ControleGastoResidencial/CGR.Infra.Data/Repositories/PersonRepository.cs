@@ -40,18 +40,16 @@ namespace CGR.Infra.Data.Repositories
             return await _personContext.People.ToListAsync();
         }
 
-        public async Task<Person> UpdateAsync(Person person)
+        public async Task UpdateAsync(Person person)
         {
-            _personContext.People.Update(person);
+            //_personContext.Update(person);
             await _personContext.SaveChangesAsync();
-
-            return person;
         }
 
         public async Task DeleteAsync(Guid id)
         {
             var person = await GetByIdAsync(id);
-            _personContext.People.Remove(person);
+            _personContext.Remove(person);
             await _personContext.SaveChangesAsync();
         }
     }

@@ -6,7 +6,7 @@ namespace CGR.Application.Interfaces
     {
         Task<PersonDTO> CreateAsync(PersonDTO personDto);
         Task<PersonDTO> GetByIdAsync(Guid? id);
-        Task<PersonDTO> UpdateAsync(PersonDTO personDto);
+        Task UpdateAsync(PersonDTO personDto);
         Task<IEnumerable<PersonDTO>> GetPeopleAsync();
         Task DeleteAsync(Guid id);
     }
