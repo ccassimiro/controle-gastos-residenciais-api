@@ -43,7 +43,7 @@ namespace CGR.Infra.Data.Repositories
                                     SUM(CASE WHEN t.PurposeType = 1 THEN t.[Value] ELSE 0 END) AS Expense,
                                     SUM(CASE WHEN t.PurposeType = 2 THEN t.[Value] ELSE 0 END)
                                   - SUM(CASE WHEN t.PurposeType = 1 THEN t.[Value] ELSE 0 END) AS Balance
-                                FROM [CGRdb].[dbo].[People] AS p
+                                FROM [People] AS p
                                 LEFT JOIN [Transactions] AS t
                                     ON t.PersonId = p.Id
                                    AND t.PurposeType IN (1, 2)
