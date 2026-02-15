@@ -25,6 +25,8 @@ namespace CGR.Application.DTOs
         public PurposeType PurposeType { get; set; }
 
         public Guid CategoryId { get; set; }
+        public CategoryDTO? Category { get; set; }
         public Guid PersonId { get; set; }
+        public PersonDTO? Person { get; set; }
     }
 }

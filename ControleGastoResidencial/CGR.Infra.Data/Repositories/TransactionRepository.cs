@@ -30,7 +30,11 @@ namespace CGR.Infra.Data.Repositories
 
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync()
         {
-            return await _transactionContext.Transactions.ToListAsync();
+            return await _transactionContext.Transactions
+                                            .AsNoTracking()
+                                            .Include(t => t.Category)
+                                            .Include(t => t.Person)
+                                            .ToListAsync();
         }
 
         public async Task<IEnumerable<PersonTotalSummary>> GetTotalSummary()
