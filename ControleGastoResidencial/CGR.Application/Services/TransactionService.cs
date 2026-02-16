@@ -33,7 +33,7 @@ namespace CGR.Application.Services
             return _mapper.Map<IEnumerable<TransactionDTO>>(transactions);
         }
 
-        public async Task<TransactionDTO> CreateAsync(TransactionDTO transactionDto)
+        public async Task<CreateTransactionDTO> CreateAsync(CreateTransactionDTO transactionDto)
         {
             var transactionPerson = await _personRepository.GetByIdAsync(transactionDto.PersonId);
             if (transactionPerson.Age < 18 && transactionDto.PurposeType == PurposeType.Income)
@@ -50,7 +50,7 @@ namespace CGR.Application.Services
 
             var newTransaction = await _transactionRepository.CreateAsync(_mapper.Map<Transaction>(transactionDto));
 
-            return _mapper.Map<TransactionDTO>(newTransaction);
+            return _mapper.Map<CreateTransactionDTO>(newTransaction);
         }
     }
 }

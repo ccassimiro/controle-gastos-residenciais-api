@@ -29,7 +29,7 @@ namespace CGR.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateTransaction([FromBody] TransactionDTO transactionDTO)
+        public async Task<ActionResult> CreateTransaction([FromBody] CreateTransactionDTO transactionDTO)
         {
             if (transactionDTO == null)
             {

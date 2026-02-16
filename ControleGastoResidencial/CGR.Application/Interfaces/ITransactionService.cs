@@ -9,7 +9,7 @@ namespace CGR.Application.Interfaces
 {
     public interface ITransactionService
     {
-        Task<TransactionDTO> CreateAsync(TransactionDTO transactionDto);
+        Task<CreateTransactionDTO> CreateAsync(CreateTransactionDTO transactionDto);
         Task<IEnumerable<TransactionDTO>> GetTransactionsAsync();
     }
 }
