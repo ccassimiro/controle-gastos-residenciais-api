@@ -40,7 +40,7 @@ namespace CGR.API.Controllers
             return NoContent();
         }
 
-        [HttpGet("totals")]
+        [HttpGet("transactions/totals")]
         public async Task<ActionResult<IEnumerable<CategoryTotalSummaryDTO>>> GetCategoriesTotalTransactions()
         {
             var categoryTotals = await _categoryService.GetCategoriesTotalSummaryAsync();
