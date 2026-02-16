@@ -77,45 +77,44 @@ namespace CGR.Infra.Data.Repositories
 
         public async Task<CategoriesTotalSummary> GetCategoriesTotalSummary()
         {
-            const string sql = @"SELECT
-                                    c.Id AS Id,
-                                    c.Description AS [Name],
-                                    c.PurposeType AS PurposeType,
-                                    CAST(COALESCE(SUM(t.[Value]), 0) AS decimal(18,2)) AS Total
-                                FROM [Categories] c
-                                LEFT JOIN [Transactions] t
-                                    ON t.CategoryId = c.Id
-                                GROUP BY
-                                    c.Id,
-                                    c.Description,
-                                    c.PurposeType
-                                ORDER BY
-                                    c.Description,
-                                    c.PurposeType;";
+            const string sqlCategories = @"SELECT
+                                            c.Id AS Id,
+                                            c.Description AS [Name],
+                                            c.PurposeType AS PurposeType,
+                                            CAST(COALESCE(SUM(t.[Value]), 0) AS decimal(18,2)) AS Total
+                                        FROM [Categories] c
+                                        LEFT JOIN [Transactions] t
+                                            ON t.CategoryId = c.Id
+                                        GROUP BY
+                                            c.Id,
+                                            c.Description,
+                                            c.PurposeType";
 
-            var categories = await _transactionContext.CategoriesTotalSummaries
-                .FromSqlRaw(sql)
+            var categories = await _transactionContext.CategoryTotalSummaries
+                .FromSqlRaw(sqlCategories)
                 .AsNoTracking()
                 .ToListAsync();
 
-            var totalIncome = categories
-                .Where(x => x.PurposeType == PurposeType.Income)
-                .Sum(x => x.Total);
+            const string sqlTotals = @"SELECT
+                                        TotalExpense = CAST(COALESCE(SUM(CASE WHEN t.PurposeType = 1 THEN t.[Value] ELSE 0 END), 0) AS decimal(18,2)),
+                                        TotalIncome  = CAST(COALESCE(SUM(CASE WHEN t.PurposeType = 2 THEN t.[Value] ELSE 0 END), 0) AS decimal(18,2)),
+                                        TotalBalance = CAST(
+                                            COALESCE(SUM(CASE WHEN t.PurposeType = 2 THEN t.[Value] ELSE 0 END), 0)
+                                          - COALESCE(SUM(CASE WHEN t.PurposeType = 1 THEN t.[Value] ELSE 0 END), 0)
+                                        AS decimal(18,2))
+                                    FROM [Transactions] t";
 
-            var totalExpense = categories
-                .Where(x => x.PurposeType == PurposeType.Expense)
-                .Sum(x => x.Total);
+            var totals = await _transactionContext.TotalsRows
+                .FromSqlRaw(sqlTotals)
+                .AsNoTracking()
+                .FirstAsync();
 
-
-            var totals = new CategoriesTotalSummary
+            return new CategoriesTotalSummary
             {
                 Categories = categories,
-                TotalIncome = totalIncome,
-                TotalExpense = totalExpense,
-                TotalBalance = totalIncome - totalExpense
+                Totals = totals
             };
-
-            return totals;
         }
+
     }
 }

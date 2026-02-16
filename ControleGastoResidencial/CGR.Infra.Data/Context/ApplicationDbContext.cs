@@ -1,43 +1,45 @@
 ﻿using CGR.Domain.Entities;
 using CGR.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CGR.Infra.Data.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options) { }
 
-        }
+        // Entidades reais
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Person> People { get; set; } = null!;
+        public DbSet<Transaction> Transactions { get; set; } = null!;
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        // Keyless query types
         public DbSet<PersonTotalSummary> PersonTotalSummaries => Set<PersonTotalSummary>();
-        public DbSet<CategoryTotalSummary> CategoriesTotalSummaries => Set<CategoryTotalSummary>();
+        public DbSet<CategoryTotalSummary> CategoryTotalSummaries => Set<CategoryTotalSummary>();
+        public DbSet<TotalsRow> TotalsRows => Set<TotalsRow>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // diz pro EF que não é view/tabela
-            modelBuilder.Entity<PeopleTotalSummary>(entity =>
+            modelBuilder.Entity<PersonTotalSummary>(e =>
             {
-                entity.HasNoKey();
-                entity.ToView(null);
+                e.HasNoKey();
+                e.ToView(null);
             });
-            modelBuilder.Entity<CategoriesTotalSummary>(entity =>
+
+            modelBuilder.Entity<CategoryTotalSummary>(e =>
             {
-                entity.HasNoKey();
-                entity.ToView(null);
+                e.HasNoKey();
+                e.ToView(null);
             });
-            //
+
+            modelBuilder.Entity<TotalsRow>(e =>
+            {
+                e.HasNoKey();
+                e.ToView(null);
+            });
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
