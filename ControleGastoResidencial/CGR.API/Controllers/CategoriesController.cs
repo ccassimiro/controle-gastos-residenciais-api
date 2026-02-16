@@ -1,5 +1,6 @@
 ﻿using CGR.Application.DTOs;
 using CGR.Application.Interfaces;
+using CGR.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +42,7 @@ namespace CGR.API.Controllers
         }
 
         [HttpGet("transactions/totals")]
-        public async Task<ActionResult<IEnumerable<CategoryTotalSummaryDTO>>> GetCategoriesTotalTransactions()
+        public async Task<ActionResult<CategoriesTotalSummary>> GetCategoriesTotalTransactions()
         {
             var categoryTotals = await _categoryService.GetCategoriesTotalSummaryAsync();
             if (categoryTotals == null)

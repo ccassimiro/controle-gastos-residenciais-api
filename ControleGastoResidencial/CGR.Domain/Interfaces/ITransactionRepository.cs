@@ -15,6 +15,6 @@ namespace CGR.Domain.Interfaces
         Task<IEnumerable<Transaction>> GetTransactionsAsync();
         Task<PeopleTotalSummary> GetTotalSummary();
 
-        Task<IEnumerable<CategoryTotalSummary>> GetCategoriesTotalSummary();
+        Task<CategoriesTotalSummary> GetCategoriesTotalSummary();
     }
 }

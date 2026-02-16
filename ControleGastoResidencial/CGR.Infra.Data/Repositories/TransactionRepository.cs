@@ -1,4 +1,5 @@
 ﻿using CGR.Domain.Entities;
+using CGR.Domain.Enum;
 using CGR.Domain.Interfaces;
 using CGR.Domain.Models;
 using CGR.Infra.Data.Context;
@@ -74,7 +75,7 @@ namespace CGR.Infra.Data.Repositories
             return totals;
         }
 
-        public async Task<IEnumerable<CategoryTotalSummary>> GetCategoriesTotalSummary()
+        public async Task<CategoriesTotalSummary> GetCategoriesTotalSummary()
         {
             const string sql = @"SELECT
                                     c.Id AS Id,
@@ -90,12 +91,31 @@ namespace CGR.Infra.Data.Repositories
                                     c.PurposeType
                                 ORDER BY
                                     c.Description,
-                                    c.PurposeType;";                           
+                                    c.PurposeType;";
 
-            return await _transactionContext.CategoriesTotalSummaries
+            var categories = await _transactionContext.CategoriesTotalSummaries
                 .FromSqlRaw(sql)
                 .AsNoTracking()
                 .ToListAsync();
+
+            var totalIncome = categories
+                .Where(x => x.PurposeType == PurposeType.Income)
+                .Sum(x => x.Total);
+
+            var totalExpense = categories
+                .Where(x => x.PurposeType == PurposeType.Expense)
+                .Sum(x => x.Total);
+
+
+            var totals = new CategoriesTotalSummary
+            {
+                Categories = categories,
+                TotalIncome = totalIncome,
+                TotalExpense = totalExpense,
+                TotalBalance = totalIncome - totalExpense
+            };
+
+            return totals;
         }
     }
 }

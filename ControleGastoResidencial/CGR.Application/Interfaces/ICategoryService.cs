@@ -1,5 +1,6 @@
 ﻿using CGR.Application.DTOs;
 using CGR.Domain.Entities;
+using CGR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace CGR.Application.Interfaces
     {
         Task<IEnumerable<CategoryDTO>> GetCategoriesAsync();
         Task CreateAsync(CategoryDTO categoryDto);
-        Task<IEnumerable<CategoryTotalSummaryDTO>> GetCategoriesTotalSummaryAsync();
+        Task<CategoriesTotalSummary> GetCategoriesTotalSummaryAsync();
     }
 }

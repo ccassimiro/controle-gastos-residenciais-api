@@ -3,6 +3,7 @@ using CGR.Application.DTOs;
 using CGR.Application.Interfaces;
 using CGR.Domain.Entities;
 using CGR.Domain.Interfaces;
+using CGR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,10 @@ namespace CGR.Application.Services
             await _categoryRepository.CreateAsync(_mapper.Map<Category>(categoryDto));
         }
 
-        public async Task<IEnumerable<CategoryTotalSummaryDTO>> GetCategoriesTotalSummaryAsync()
+        public async Task<CategoriesTotalSummary> GetCategoriesTotalSummaryAsync()
         {
             var categoriesTotalSummary = await _transactionRepository.GetCategoriesTotalSummary();
-            return _mapper.Map<IEnumerable<CategoryTotalSummaryDTO>>(categoriesTotalSummary);
+            return _mapper.Map<CategoriesTotalSummary>(categoriesTotalSummary);
         }
     }
 }

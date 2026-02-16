@@ -32,7 +32,7 @@ namespace CGR.Infra.Data.Context
                 entity.HasNoKey();
                 entity.ToView(null);
             });
-            modelBuilder.Entity<CategoryTotalSummary>(entity =>
+            modelBuilder.Entity<CategoriesTotalSummary>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToView(null);
