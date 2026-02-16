@@ -56,10 +56,10 @@ namespace CGR.Application.Services
             await _personRepository.UpdateAsync(_mapper.Map<Person>(personDto));
         }
 
-        public async Task<IEnumerable<PersonTotalSummaryDTO>> GetPeopleTotalSummaryAsync()
+        public async Task<PeopleTotalSummaryDTO> GetPeopleTotalSummaryAsync()
         {
             var peopleTotalSummary = await _transactionRepository.GetTotalSummary();
-            return _mapper.Map<IEnumerable<PersonTotalSummaryDTO>>(peopleTotalSummary);
+            return _mapper.Map<PeopleTotalSummaryDTO>(peopleTotalSummary);
         }
     }
 }

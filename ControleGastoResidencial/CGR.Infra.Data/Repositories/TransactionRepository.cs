@@ -37,7 +37,7 @@ namespace CGR.Infra.Data.Repositories
                                             .ToListAsync();
         }
 
-        public async Task<IEnumerable<PersonTotalSummary>> GetTotalSummary()
+        public async Task<PeopleTotalSummary> GetTotalSummary()
         {
             const string sql = @"
                                 SELECT
@@ -54,10 +54,24 @@ namespace CGR.Infra.Data.Repositories
                                 GROUP BY p.Id, p.Name
                                 ORDER BY p.Name;";
 
-            return await _transactionContext.PersonTotalSummaries
+            var people = await _transactionContext.PersonTotalSummaries
                 .FromSqlRaw(sql)
                 .AsNoTracking()
                 .ToListAsync();
+
+            var totalIncome = people.Sum(x => x.Income);
+            var totalExpense = people.Sum(x => x.Expense);
+
+
+            var totals = new PeopleTotalSummary
+            {
+               TotalExpense = totalExpense,
+               TotalIncome = totalIncome,
+               TotalBalance = totalIncome - totalExpense,
+               People = people,
+            };
+
+            return totals;
         }
 
         public async Task<IEnumerable<CategoryTotalSummary>> GetCategoriesTotalSummary()
@@ -70,7 +84,6 @@ namespace CGR.Infra.Data.Repositories
                                 FROM [Categories] c
                                 LEFT JOIN [Transactions] t
                                     ON t.CategoryId = c.Id
-                                   AND t.PurposeType = c.PurposeType
                                 GROUP BY
                                     c.Id,
                                     c.Description,

@@ -27,7 +27,7 @@ namespace CGR.Infra.Data.Context
             base.OnModelCreating(modelBuilder);
 
             // diz pro EF que não é view/tabela
-            modelBuilder.Entity<PersonTotalSummary>(entity =>
+            modelBuilder.Entity<PeopleTotalSummary>(entity =>
             {
                 entity.HasNoKey();
                 entity.ToView(null);

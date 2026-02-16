@@ -14,7 +14,7 @@ namespace CGR.Application.Mappings
             CreateMap<Transaction, TransactionDTO>().ReverseMap();
             CreateMap<Transaction, CreateTransactionDTO>().ReverseMap();
 
-            CreateMap<PersonTotalSummary, PersonTotalSummaryDTO>().ReverseMap();
+            CreateMap<PeopleTotalSummary, PeopleTotalSummaryDTO>().ReverseMap();
             CreateMap<CategoryTotalSummary, CategoryTotalSummaryDTO>().ReverseMap();
         }
     }

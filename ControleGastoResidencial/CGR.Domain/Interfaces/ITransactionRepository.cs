@@ -13,7 +13,7 @@ namespace CGR.Domain.Interfaces
     {
         Task<Transaction> CreateAsync(Transaction transaction);
         Task<IEnumerable<Transaction>> GetTransactionsAsync();
-        Task<IEnumerable<PersonTotalSummary>> GetTotalSummary();
+        Task<PeopleTotalSummary> GetTotalSummary();
 
         Task<IEnumerable<CategoryTotalSummary>> GetCategoriesTotalSummary();
     }
